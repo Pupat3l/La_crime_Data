@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="Crimes_in_LA" id="Project-117f" database="Redshift" >
+	<schema name="crimes_in_la" >
+		<table name="dim_crime" prior="dim_" >
+			<column name="crimeid" type="integer" jt="4" mandatory="y" />
+			<column name="crm cd desc" type="char" length="255" jt="1" />
+			<index name="pk_dim_crime" unique="PRIMARY_KEY" >
+				<column name="crimeid" />
+			</index>
+		</table>
+		<table name="dim_dates" prior="tbl" >
+			<column name="dateid" type="date" jt="91" mandatory="y" />
+			<column name="year" type="integer" jt="4" />
+			<column name="month" type="integer" jt="4" />
+			<column name="day" type="integer" jt="4" />
+			<column name="weekday" type="char" length="15" jt="1" />
+			<column name="hour" type="integer" jt="4" />
+			<index name="pk_dim_dates" unique="PRIMARY_KEY" >
+				<column name="dateid" />
+			</index>
+		</table>
+		<table name="dim_facts" prior="dim_fact" >
+			<column name="dr_no" type="bigint" jt="-5" mandatory="y" />
+			<column name="dateid" type="date" jt="91" />
+			<column name="date rptd" type="date" jt="91" />
+			<column name="crm cd 1" type="decimal" jt="3" />
+			<column name="crm cd 2" type="decimal" jt="3" />
+			<column name="crm cd 3" type="decimal" jt="3" />
+			<column name="crm cd 4" type="decimal" jt="3" />
+			<column name="status" type="char" length="2" jt="1" />
+			<column name="weapon used cd" type="decimal" jt="3" />
+			<column name="premis cd" type="decimal" jt="3" />
+			<column name="mocodes" type="char" length="255" jt="1" />
+			<column name="part 1-2" type="integer" jt="4" />
+			<column name="locationid" type="integer" jt="4" />
+			<column name="victimid" type="integer" jt="4" />
+			<index name="pk_dim_facts" unique="PRIMARY_KEY" >
+				<column name="dr_no" />
+			</index>
+			<fk name="fk_dim_facts_dim_dates" to_schema="crimes_in_la" to_table="dim_dates" >
+				<fk_column name="dateid" pk="dateid" />
+			</fk>
+			<fk name="fk_dim_facts_dim_dates_0" to_schema="crimes_in_la" to_table="dim_dates" >
+				<fk_column name="date rptd" pk="dateid" />
+			</fk>
+			<fk name="fk_dim_facts_dim_crime" to_schema="crimes_in_la" to_table="dim_crime" >
+				<fk_column name="crm cd 1" pk="crimeid" />
+			</fk>
+			<fk name="fk_dim_facts_dim_crime_0" to_schema="crimes_in_la" to_table="dim_crime" >
+				<fk_column name="crm cd 2" pk="crimeid" />
+			</fk>
+			<fk name="fk_dim_facts_dim_crime_1" to_schema="crimes_in_la" to_table="dim_crime" >
+				<fk_column name="crm cd 3" pk="crimeid" />
+			</fk>
+			<fk name="fk_dim_facts_dim_crime_2" to_schema="crimes_in_la" to_table="dim_crime" >
+				<fk_column name="crm cd 4" pk="crimeid" />
+			</fk>
+			<fk name="fk_dim_facts_dim_status" to_schema="crimes_in_la" to_table="dim_status" >
+				<fk_column name="status" pk="statusid" />
+			</fk>
+			<fk name="fk_dim_facts_dim_weapon" to_schema="crimes_in_la" to_table="dim_weapon" >
+				<fk_column name="weapon used cd" pk="weaponid" />
+			</fk>
+			<fk name="fk_dim_facts_dim_premis" to_schema="crimes_in_la" to_table="dim_premis" >
+				<fk_column name="premis cd" pk="premisid" />
+			</fk>
+			<fk name="fk_dim_facts_dim_locations" to_schema="crimes_in_la" to_table="dim_locations" >
+				<fk_column name="locationid" pk="locationid" />
+			</fk>
+			<fk name="fk_dim_facts_dim_victim" to_schema="crimes_in_la" to_table="dim_victim" >
+				<fk_column name="victimid" pk="victimid" />
+			</fk>
+		</table>
+		<table name="dim_locations" prior="dim_location" >
+			<column name="locationid" prior="location_id" type="integer" jt="4" mandatory="y" />
+			<column name="location" type="char" length="255" jt="1" />
+			<column name="area" type="integer" jt="4" />
+			<column name="area name" prior="area_name" type="varchar" length="100" jt="12" />
+			<column name="rpt dist no" prior="rpt_dist_no" type="integer" jt="4" />
+			<column name="cross street" type="char" length="255" jt="1" />
+			<column name="lat" type="decimal" jt="3" />
+			<column name="lon" type="decimal" jt="3" />
+			<index name="pk_dim_locations" unique="PRIMARY_KEY" >
+				<column name="locationid" />
+			</index>
+		</table>
+		<table name="dim_premis" prior="dim_" >
+			<column name="premisid" type="decimal" jt="3" mandatory="y" />
+			<column name="premis desc" type="char" length="255" jt="1" />
+			<index name="pk_dim_premis" unique="PRIMARY_KEY" >
+				<column name="premisid" />
+			</index>
+		</table>
+		<table name="dim_status" prior="dim-status" >
+			<column name="statusid" type="char" length="2" jt="1" mandatory="y" />
+			<column name="status desc" type="char" length="25" jt="1" />
+			<index name="pk_dim_status" unique="PRIMARY_KEY" >
+				<column name="statusid" />
+			</index>
+		</table>
+		<table name="dim_victim" prior="tbl" >
+			<column name="victimid" type="integer" jt="4" mandatory="y" />
+			<column name="vict age" type="integer" jt="4" />
+			<column name="vict sex" type="char" length="1" jt="1" />
+			<column name="vict descent" type="char" length="1" jt="1" />
+			<index name="pk_dim_victim" unique="PRIMARY_KEY" >
+				<column name="victimid" />
+			</index>
+		</table>
+		<table name="dim_weapon" prior="tbl" >
+			<column name="weaponid" type="decimal" jt="3" mandatory="y" />
+			<column name="weapon desc" type="char" length="255" jt="1" />
+			<index name="pk_dim_weapon" unique="PRIMARY_KEY" >
+				<column name="weaponid" />
+			</index>
+		</table>
+	</schema>
+	<layout name="Default Layout" id="Layout-1d3" show_relation="columns" >
+		<entity schema="crimes_in_la" name="dim_crime" color="C1D8EE" x="918" y="374" />
+		<entity schema="crimes_in_la" name="dim_dates" color="C1D8EE" x="289" y="289" />
+		<entity schema="crimes_in_la" name="dim_facts" color="C1D8EE" x="595" y="510" />
+		<entity schema="crimes_in_la" name="dim_locations" color="C1D8EE" x="595" y="272" />
+		<entity schema="crimes_in_la" name="dim_premis" color="C1D8EE" x="952" y="731" />
+		<entity schema="crimes_in_la" name="dim_status" color="C1D8EE" x="289" y="731" />
+		<entity schema="crimes_in_la" name="dim_victim" color="C1D8EE" x="272" y="544" />
+		<entity schema="crimes_in_la" name="dim_weapon" color="C1D8EE" x="935" y="595" />
+		<callout x="51" y="51" pointer="Round" >
+			<comment><![CDATA[This is a layout - a diagram with tools.
+- Right-click the layout to create new tables. 
+- Double-click table headers to edit. 
+- For a better understanding of the schema, create multiple layouts.
+- Save the design to the model file, and deploy from 'Schema / Create into the database'.]]></comment>
+		</callout>
+	</layout>
+</project>
