@@ -2,6 +2,7 @@
 # Data Warehousing Project
 ### Pujan Patel - CIS 4400
 
+![LA Image](https://github.com/Pupat3l/La_crime_Data/assets/94638467/64fabc29-1610-4926-b6ec-825124b85a71)
 
 ## Description
 This project is a data warehousing solution designed to consolidate, transform, and store large volumes of LA crime reports data for analytical purposes. It aims to provide a centralized repository for analyzing and visualizing crime data based on loaction, gender, and status etc.
