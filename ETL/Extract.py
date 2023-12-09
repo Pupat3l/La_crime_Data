@@ -28,7 +28,7 @@ def upload_to_s3(local_file, bucket_name, s3_file, aws_access_key_id, aws_secret
 # Replace these variables with your own values
 local_file_path = "local/path/to/data/file"
 s3_bucket_name = "s3-bucket"
-s3_key = "landing/data.csv"
+s3_key = "path/to/file"
 access_key = 'xyz'
 secret_key = 'xyz'
 

@@ -4,7 +4,7 @@ import psycopg2
 from botocore.exceptions import ClientError
 
 # %%
-bucket_name = "pp-la-crime-data"
+bucket_name = "bucket-name"
 folder_path = "cleaned/"
 access_key = 'key'
 secret_key = 'key'
@@ -27,8 +27,8 @@ file_names
 # Redshift Serverless connection details
 endpoint = 'endpoint'
 port = '5439'  # default Redshift port
-database = 'dev'
-user = 'admin'
+database = 'db'
+user = 'admin-user'
 password = 'password'
 timeout=60
 
@@ -53,8 +53,8 @@ def load_data(copy_cmd):
         cur.close()
 
 # %%
-schema="crimes_in_la"
-region="us-east-2"
+schema="schema"
+region="region"
 iam_role='role_arn'
 
 # %%
