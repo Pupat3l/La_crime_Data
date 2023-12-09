@@ -1,6 +1,6 @@
 # LA Crime Data
 # Data Warehousing Project
-## Pujan
+### Pujan Patel - CIS 4400
 
 
 ## Description
