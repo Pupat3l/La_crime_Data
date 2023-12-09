@@ -1,0 +1,87 @@
+CREATE SCHEMA crimes_in_la;
+
+CREATE TABLE crimes_in_la.dim_crime ( 
+	crime_id             integer  NOT NULL  ,
+	crime_description    varchar(255)    ,
+	CONSTRAINT pk_dim_crime PRIMARY KEY ( crime_id )
+ );
+
+CREATE TABLE crimes_in_la.dim_dates ( 
+	date_id              timestamp  NOT NULL  ,
+	"year"               integer    ,
+	"month"              integer    ,
+	"day"                integer    ,
+	weekday              varchar(15)    ,
+	"hour"               integer    ,
+	"minute"             integer    ,
+	CONSTRAINT pk_dim_dates PRIMARY KEY ( date_id )
+ );
+
+CREATE TABLE crimes_in_la.dim_location ( 
+	location_id          integer  NOT NULL  ,
+	"location"           varchar(255)    ,
+	area                 integer    ,
+	"area name"          varchar(255)    ,
+	"rpt dist no"        integer    ,
+	"cross street"       varchar(255)    ,
+	lat                  double precision    ,
+	lon                  double precision    ,
+	CONSTRAINT pk_dim_locations PRIMARY KEY ( location_id )
+ );
+
+CREATE TABLE crimes_in_la.dim_premis ( 
+	premis_id            integer  NOT NULL  ,
+	"premis desc"        varchar(255)    ,
+	CONSTRAINT pk_dim_premis PRIMARY KEY ( premis_id )
+ );
+
+CREATE TABLE crimes_in_la.dim_status ( 
+	status_id            varchar(5)  NOT NULL  ,
+	"status desc"        varchar(255)    ,
+	CONSTRAINT pk_dim_status PRIMARY KEY ( status_id )
+ );
+
+CREATE TABLE crimes_in_la.dim_victim ( 
+	victim_id            integer  NOT NULL  ,
+	"vict age"           integer    ,
+	"vict sex"           varchar(5)    ,
+	"vict descent"       varchar(5)    ,
+	CONSTRAINT pk_dim_victim PRIMARY KEY ( victim_id )
+ );
+
+CREATE TABLE crimes_in_la.dim_weapon ( 
+	weapon_id            integer  NOT NULL  ,
+	"weapon desc"        varchar(255)    ,
+	CONSTRAINT pk_dim_weapon PRIMARY KEY ( weapon_id )
+ );
+
+CREATE TABLE crimes_in_la.dim_facts ( 
+	dr_no                integer  NOT NULL  ,
+	date_occ             timestamp    ,
+	date_rptd            timestamp    ,
+	crime_code           integer    ,
+	crime_code_1         integer    ,
+	crime_code_2         integer    ,
+	crime_code_3         integer    ,
+	crime_code_4         integer    ,
+	status               varchar(5)    ,
+	weapon_used_code     integer    ,
+	premis_code          integer    ,
+	location_id          integer    ,
+	victim_id            integer    ,
+	mocodes              char(255)    ,
+	part_1_2             integer    ,
+	CONSTRAINT pk_dim_facts PRIMARY KEY ( dr_no ),
+	CONSTRAINT fk_dim_facts_dim_dates FOREIGN KEY ( date_occ ) REFERENCES crimes_in_la.dim_dates( date_id )  ,
+	CONSTRAINT fk_dim_facts_dim_dates_0 FOREIGN KEY ( date_rptd ) REFERENCES crimes_in_la.dim_dates( date_id )  ,
+	CONSTRAINT fk_dim_facts_dim_crime FOREIGN KEY ( crime_code_1 ) REFERENCES crimes_in_la.dim_crime( crime_id )  ,
+	CONSTRAINT fk_dim_facts_dim_crime_0 FOREIGN KEY ( crime_code_2 ) REFERENCES crimes_in_la.dim_crime( crime_id )  ,
+	CONSTRAINT fk_dim_facts_dim_crime_1 FOREIGN KEY ( crime_code_3 ) REFERENCES crimes_in_la.dim_crime( crime_id )  ,
+	CONSTRAINT fk_dim_facts_dim_crime_2 FOREIGN KEY ( crime_code_4 ) REFERENCES crimes_in_la.dim_crime( crime_id )  ,
+	CONSTRAINT fk_dim_facts_dim_status FOREIGN KEY ( status ) REFERENCES crimes_in_la.dim_status( status_id )  ,
+	CONSTRAINT fk_dim_facts_dim_weapon FOREIGN KEY ( weapon_used_code ) REFERENCES crimes_in_la.dim_weapon( weapon_id )  ,
+	CONSTRAINT fk_dim_facts_dim_premis FOREIGN KEY ( premis_code ) REFERENCES crimes_in_la.dim_premis( premis_id )  ,
+	CONSTRAINT fk_dim_facts_dim_locations FOREIGN KEY ( location_id ) REFERENCES crimes_in_la.dim_location( location_id )  ,
+	CONSTRAINT fk_dim_facts_dim_victim FOREIGN KEY ( victim_id ) REFERENCES crimes_in_la.dim_victim( victim_id )  ,
+	CONSTRAINT fk_dim_facts_dim_crime_3 FOREIGN KEY ( crime_code ) REFERENCES crimes_in_la.dim_crime( crime_id )  
+ );
