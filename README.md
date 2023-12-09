@@ -1,6 +1,6 @@
-# Pujan Patel
+# LA Crime Data
 # Data Warehousing Project
-# La Crime Data
+## Pujan
 
 
 ## Description
@@ -31,9 +31,9 @@ The data size is around 206.6 MB - this suggests that analyzation is possible an
 
 ## Methods
 - Dimensional Modeling: creating a fact & dimension tables to model our data and to help us better understand the relationships between them.
-- The DbSchema can be found [Here](https://github.com/Pupat3l/OTC_4400/blob/main/DbSchema/OTC.dbs)
+- The DbSchema can be found [Here](https://github.com/Pupat3l/La_crime_Data/blob/main/DbSchema/la_crime_data.dbs)
 
-<img width="632" alt="DbSchema" src=https://github.com/Pupat3l/OTC_4400/blob/main/DbSchema/DbSchema.jpeg>
+<img width="632" alt="DbSchema" src=https://github.com/Pupat3l/La_crime_Data/blob/main/DbSchema/dimension_modeling.png>
 
   
 - Extract, Transform, Load (ETL) Processes for Data Integration
@@ -43,11 +43,11 @@ The data size is around 206.6 MB - this suggests that analyzation is possible an
 ### Extract:
 - The data was downloaded from the data source and stored to the local file system.
 - Python & Boto3 was used to upload my data from my local file system to Amazon Web Services Storage (S3)
-  [Extract.py script](https://github.com/Pupat3l/OTC_4400/blob/main/ETL/Extract.py)
+  [Extract.py script](https://github.com/Pupat3l/La_crime_Data/blob/main/ETL/Extract.py)
 
 ### Transform: 
 - Python & Boto3 (Python was used to transform the data, making sure all data types matched our schema & dropping anything unneccesary). We utilized Pandas to make any transformations (split up the original CSV file into dimensions) & then uploaded the individual dimensions back to S3 in CSV format.
-  [transform.py script](https://github.com/Pupat3l/OTC_4400/blob/main/ETL/transform.py)
+  [transform.py script](https://github.com/Pupat3l/La_crime_Data/blob/main/ETL/transform.py)
 
 ### Load: 
 
@@ -55,40 +55,40 @@ The data size is around 206.6 MB - this suggests that analyzation is possible an
 - I decided to use Amazon Web Services Datawarehouse (AWS Redshift Serverless) for this project, we had a predefined schema because of our dbSchema.
 - For loading the data into Redshift, I created an automated script in python that uploaded dimensions files to Datawarehouse from s3 bucket.
 - But for the connection to happen, I had to edit the admin details, IP inbound rules, and security of the datawarehouse.
-  [load.py_script](https://github.com/Pupat3l/OTC_4400/blob/main/ETL/load.py)
+  [load.py_script](https://github.com/Pupat3l/La_crime_Data/blob/main/ETL/load.py)
 
 ### Visualization:
 
 - I utilized Tableau to create visualizations and connected to the Redshift from tableau and connected to data.
-- The Tableau workbook is uploaded [here](https://github.com/Pupat3l/OTC_4400/blob/main/Tableau/OTC_Engineers.twb)
+- The Tableau workbook is uploaded [here](https://github.com/Pupat3l/La_crime_Data/blob/main/Tableau/Crime_data.twbx)
 - Following are the visualization created:
 
 #### Crimes over Area Names
-![Visualization 1](https://github.com/Pupat3l/OTC_4400/blob/main/Tableau/Price_Change.png)
+![Visualization 1](https://github.com/Pupat3l/La_crime_Data/blob/main/Tableau/Crime_in_areas.png)
 - I created a visualization using DR_NO which is the record number for all crimes committed and Area Name is like a zip code area in a bar chart.
 - The visualization shows the crime committed based on different areas in LA.
 - As you can see, Central Area has the most amount of crime reported in LA during the time frame.
   
 ### Crimes and Victim Sex
-![Visualization 2](https://github.com/Pupat3l/OTC_4400/blob/main/Tableau/Share_Volume.png)
+![Visualization 2](https://github.com/Pupat3l/La_crime_Data/blob/main/Tableau/crime_victim.png)
 - I created a visualization using DR_NO and Victim Sex in a packed bubbles.
 - The visualization shows Sex of the victims in all the crimes committed.
 - As you can see, Victims are mostly Males and over past almost 4 years, 75 trillion crimes have committed against them, with a possibility of more due to N/A category which i created to handle null values.
 
 ### Weapon Used in Crime
-![Visualization 3](https://github.com/Pupat3l/OTC_4400/blob/main/Tableau/Bid_Ask_spread.png)
+![Visualization 3](https://github.com/Pupat3l/La_crime_Data/blob/main/Tableau/Weapons_used.png)
 - I created a visualization using DR_NO and Weapon Used Code in the form of a pie chart.
 - The visualization shows all crimes committed and what weapon was used for the crime.
 - As you can see the most amount of crime committed was with id 0 which means that bare arms were used and no weapons.
 
 ### Crimes over month
-![Visualization 4](https://github.com/Pupat3l/OTC_4400/blob/main/Tableau/Trading_Volume_vs_Price_Changes.png)
+![Visualization 4](https://github.com/Pupat3l/La_crime_Data/blob/main/Tableau/Crime_over_months.png)
 - I created a visualization using DR_NO and date rptd (reported) columns in the form of bar chart.
 - The visualization shows amount of crimes committed over months.
 - As you can see August is the month with most crimes committed, with July being the second most month.
 
 ### Dashboard combining all visualization
-![Visualization 5](https://github.com/Pupat3l/OTC_4400/blob/main/Tableau/Dashboard.png)
+![Visualization 5](https://github.com/Pupat3l/La_crime_Data/blob/main/Tableau/Dashboard.png)
 - The Dashboard is an interactive visualization that shows real-time updates of all 4 visualization from above. There is also a filer in place for Status and Venue which helps visualize trends on different combinations of statuses and venues.
 
 ## Tools 
