@@ -43,8 +43,10 @@ Data Dictionary can be found [here](https://data.lacity.org/Public-Safety/Crime-
 
 ### Extract:
 - The data was downloaded from the data source and stored to the local file system.
+- I've added a code snippet that will automate the download from url and put it straight to s3 bucket.
 - Python & Boto3 was used to upload my data from my local file system to Amazon Web Services Storage (S3)
   [Extract.py script](https://github.com/Pupat3l/La_crime_Data/blob/main/ETL/Extract.py)
+
 
 ### Transform: 
 - Python & Boto3 (Python was used to transform the data, making sure all data types matched our schema & dropping anything unneccesary). We utilized Pandas to make any transformations (split up the original CSV file into dimensions) & then uploaded the individual dimensions back to S3 in CSV format.
@@ -92,6 +94,9 @@ Data Dictionary can be found [here](https://data.lacity.org/Public-Safety/Crime-
 ![Visualization 5](https://github.com/Pupat3l/La_crime_Data/blob/main/Tableau/Dashboard.png)
 - The Dashboard is an interactive visualization that shows real-time updates of all 4 visualization from above. There is also a filer in place for Status and Venue which helps visualize trends on different combinations of statuses and venues.
 
+## Future consideration
+- Use AWS lambda to periodically call my scripts and merge the data during loading process.
+  
 ## Tools 
 
 - Data Storage: AWS S3
