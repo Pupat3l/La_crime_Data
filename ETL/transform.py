@@ -379,3 +379,12 @@ s3_key="path/to/clean"
 s3.put_object(Bucket=s3_bucket_name, Key=s3_key, Body=csv_buffer.getvalue())
 
 
+#for automating:
+#when getting data, i will have to merge left merge on the data or just do all over and left merge when i load
+dims=[dim_crime,dim_location,dim_premis,dim_dates,dim_weapon,dim_status,dim_victim,dim_facts]
+for i in dims:
+    csv_buffer=StringIO()
+    i.to_csv(csv_buffer,index=False)
+    dim_name = str(i)
+    s3_key="cleaned/"+dim_name+".csv"
+    s3.put_object(Bucket=s3_bucket_name, Key=s3_key, Body=csv_buffer.getvalue())
