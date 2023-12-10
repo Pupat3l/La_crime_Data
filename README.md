@@ -26,9 +26,9 @@ The entity in interest would be Los Angeles Police Department(LAPD), City Govern
 
 ## The Data 
 
-LA Crime Data was found on [Data Lacity](https://data.lacity.org/Public-Safety/Crime-Data-from-2020-to-Present/2nrs-mtv8/data_preview) website. The original data was provided from LA Police Department and it updates every week. The scope of the data is 2020 - Present. The data includes the date, time, and area details of the crime that occured, the victim's details(age, sex, and race), weapon used, and crime committed etc.
+LA Crime Data was found on [Data Lacity](https://data.lacity.org/Public-Safety/Crime-Data-from-2020-to-Present/2nrs-mtv8/data_preview) website. The original data was provided from LA Police Department and it updates every week. The scope of the data is 2020 - Present. The data size is around 206.6 MB - this suggests that analyzation is possible and can be used to make visualizations. The data includes the date, time, and area details of the crime that occured, the victim's details(age, sex, and race), weapon used, and crime committed etc. 
 
-The data size is around 206.6 MB - this suggests that analyzation is possible and can be used to make visualizations.
+Data Dictionary can be found [here](https://data.lacity.org/Public-Safety/Crime-Data-from-2020-to-Present/2nrs-mtv8/about_data)!
 
 ## Methods
 - Dimensional Modeling: creating a fact & dimension tables to model our data and to help us better understand the relationships between them.
